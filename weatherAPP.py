@@ -68,7 +68,9 @@ with st.container():
 
     with left_column:
         st.write("Temperaturverlauf Glattbach Weitzkaut 24 / letzte Tage")
-        st.write(SQL_Query_des)
+        df = pd.DataFrame(SQL_Query_des)
+        df = df.round({'Temp': 2, 'Druck': 1})
+        st.write(df)
 
     with right_column:
         # DataFrames zur Anzeige
