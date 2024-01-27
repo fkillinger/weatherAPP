@@ -13,7 +13,7 @@ st.header('Weather - Information Glattbach Unterfranken')      # st.title() - st
 # SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://user:password@host/dbname'
 SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://FKillinger:314159frigit!@mariadb-2.c74muwoki9iu.eu-north-1.rds.amazonaws.com:3306/esp_data'
 
-conn = create_engine(SQLALCHEMY_DATABASE_URI, echo=True)
+conn = create_engine(SQLALCHEMY_DATABASE_URI, echo=False)
 
 SQL_Query = pd.read_sql("""select location as loc
                                     FROM esp_data.SensorData 
