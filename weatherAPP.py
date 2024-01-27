@@ -1,8 +1,6 @@
 from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import declarative_base
 import streamlit as st
 import pandas as pd
-import numpy as np
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
@@ -68,9 +66,7 @@ with st.container():
 
     with left_column:
         st.write("Temperaturverlauf Glattbach Weitzkaut 24 / letzte Tage")
-        df = pd.DataFrame(SQL_Query_des)
-        df = df.round({'Temp': 2, 'Druck': 1})
-        st.write(df)
+        st.write(SQL_Query_des)
 
     with right_column:
         # DataFrames zur Anzeige
