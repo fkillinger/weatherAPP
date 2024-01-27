@@ -1,7 +1,5 @@
-numpy==1.15.1
 numpy==1.22.4
 pandas==1.5.3
 plotly==5.18.0
 SQLAlchemy==2.0.25
-streamlit==1.26.0
 streamlit==1.29.0
