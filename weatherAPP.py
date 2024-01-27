@@ -4,7 +4,7 @@ import pandas as pd
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
-st.set_page_config(page_title="KC Webspace", page_icon=":sun:", layout="wide")
+st.set_page_config(page_title="KC Webspace", page_icon=":sun-60:", layout="wide")
 
 st.header('Weather - Information Glattbach Unterfranken')      # st.title() - st.header()  - st.subheader()
 
@@ -15,7 +15,7 @@ conn = create_engine(SQLALCHEMY_DATABASE_URI, echo=False)
 
 SQL_Query = pd.read_sql("""select location as loc
                                     FROM esp_data.SensorData 
-                                    where id >= (select max(id) from esp_data.SensorData) -  12""", conn)
+                                    where id >= (select max(id) from esp_data.SensorData) -  240""", conn)
 
 # Abfage welche locations es in DB gibt - Diese werden in der Select - Box angezeigt!
 loc_set = set()                                                    # set --> Menge
@@ -66,7 +66,9 @@ with st.container():
 
     with left_column:
         st.write("Temperaturverlauf Glattbach Weitzkaut 24 / letzte Tage")
-        st.write(SQL_Query_des)
+        df = pd.DataFrame(SQL_Query_des)
+        df = df.round({'Temp': 2, 'Druck': 1})
+        st.write(df)
 
     with right_column:
         # DataFrames zur Anzeige
@@ -81,7 +83,7 @@ with st.container():
         # fig.update_xaxes(griddash='dot')
         fig.update_yaxes(griddash='dot')
         # fig.update_xaxes(gridcolor='white')
-        fig.update_yaxes(gridcolor='white')
+        fig.update_yaxes(gridcolor='grey')
         fig = fig.add_trace(go.Scatter(x=df2.Time, y=df2.Druck, mode="lines", name="Luftdruck"), secondary_y=True)
 
         # Add figure title
@@ -91,17 +93,19 @@ with st.container():
         # fig.update_xaxes(griddash='dot')
         fig.update_yaxes(griddash='dot')
         # fig.update_xaxes(gridcolor='white')
-        fig.update_yaxes(gridcolor='white')
-        fig.update_layout(
-            {
-                "paper_bgcolor": "rgba(100, 111, 111, 1)",
-                "plot_bgcolor": "rgba(55, 55, 55, 1)",
-            }
-        )
-
+        fig.update_yaxes(gridcolor='grey')
         # Set y-axes titles
         fig.update_yaxes(title_text="<b>Temperaturin °C</b> ", secondary_y=False)
         fig.update_yaxes(title_text="<b>Luftdruckin hPascal</b> ", secondary_y=True)
+
+        fig.update_layout(
+            {
+                "paper_bgcolor": "rgba(40, 120, 120, 1)",   # https://www.rapidtables.com/convert/color/rgb-to-hex.html
+                "plot_bgcolor": "rgba(0, 55, 55, 1)",
+            }
+        )
+        fig.update_xaxes(rangeselector_font_family='Arial')
+        fig.update_xaxes(rangeselector_font_size=24)
         fig = fig.update_layout(showlegend=True)
 
         st.plotly_chart(fig)
