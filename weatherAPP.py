@@ -95,8 +95,8 @@ with st.container():
         # fig.update_xaxes(gridcolor='white')
         fig.update_yaxes(gridcolor='grey')
         # Set y-axes titles
-        fig.update_yaxes(title_text="<b>Temperaturin °C</b> ", secondary_y=False)
-        fig.update_yaxes(title_text="<b>Luftdruckin hPascal</b> ", secondary_y=True)
+        fig.update_yaxes(title_text="<b>Temperatur </b> in °C ", secondary_y=False)
+        fig.update_yaxes(title_text="<b>Luftdruck </b> in hPascal ", secondary_y=True)
 
         fig.update_layout(
             {
