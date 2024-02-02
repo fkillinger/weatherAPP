@@ -54,7 +54,7 @@ SQL_Query = pd.read_sql("""select   reading_time as Time,
                                     cast(value2 as DECIMAL(4,0)) as Feuchte, 
                                     cast(value3 as DECIMAL(6,2)) as Druck, 
                                     cast(value5 as DECIMAL(4,0)) as Helligkeit,
-                                    cast(value6 as DECIMAL(3,0)) as Radiation
+                                    cast(value6 as DECIMAL(4,0)) as Radiation
                                     FROM esp_data.SensorData 
                                     where location = '""" + locus + """'
                                     and id >= (select max(id) from esp_data.SensorData) - """ + Counter, conn)
