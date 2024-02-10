@@ -15,7 +15,7 @@ conn = create_engine(SQLALCHEMY_DATABASE_URI, echo=False)
 
 SQL_Query = pd.read_sql("""select location as loc
                                     FROM esp_data.SensorData 
-                                    where id >= (select max(id) from esp_data.SensorData) -  240""", conn)
+                                    where id >= (select max(id) from esp_data.SensorData) -  1000""", conn)
 
 # Abfage welche locations es in DB gibt - Diese werden in der Select - Box angezeigt!
 loc_set = set()                                                    # set --> Menge
@@ -37,7 +37,7 @@ with st.container():
         Counter = 240
         # Counter = st.selectbox('Auswahl Anzahl Messpunkte', (100, 500, 1000))
         # st.write('You selected: ', Counter)
-        Counter = st.number_input('Insert dataset number', min_value = 100, step = 100)
+        Counter = st.number_input('Insert dataset number', min_value = 500, step = 500)
         st.write('The current number is ', Counter)
         Counter = str(Counter)
         st.write('###')
